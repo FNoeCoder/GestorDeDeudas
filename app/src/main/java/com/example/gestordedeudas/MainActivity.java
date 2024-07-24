@@ -1,6 +1,9 @@
 package com.example.gestordedeudas;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +12,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-
+    Button Personas;
+    Button Deudas;
+    Button Salir;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +25,19 @@ public class MainActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        Personas = findViewById(R.id.btnPersonas);
+        Deudas = findViewById(R.id.btnDeudas);
+        Salir = findViewById(R.id.btnSalir);
+        Personas.setOnClickListener(v -> {
+            Toast.makeText(this, "Personas", Toast.LENGTH_SHORT).show();
+        });
+        Deudas.setOnClickListener(v -> {
+            Toast.makeText(this, "Deudas", Toast.LENGTH_SHORT).show();
+        });
+        Salir.setOnClickListener(v -> {
+            //Cerrar la aplicación
+            finish();
         });
     }
 }
