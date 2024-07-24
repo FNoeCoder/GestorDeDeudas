@@ -1,8 +1,11 @@
 package com.example.gestordedeudas;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 public class BaseDeDatos extends SQLiteOpenHelper {
 
@@ -61,6 +64,43 @@ public class BaseDeDatos extends SQLiteOpenHelper {
                 + COLUMNA_DEUDAS_PERSONAS_ID_HISTORIAL + " INTEGER, "
                 + "FOREIGN KEY(" + COLUMNA_DEUDAS_ID_HISTORIAL + ") REFERENCES " + TABLA_DEUDAS + "(" + COLUMNA_ID_DEUDAS + "), "
                 + "FOREIGN KEY(" + COLUMNA_DEUDAS_PERSONAS_ID_HISTORIAL + ") REFERENCES " + TABLA_DEUDAS + "(" + COLUMNA_PERSONAS_ID_DEUDAS + "))");
+    }
+
+    public ArrayList<String> getPersonas(){
+        // "id-nombre"
+        ArrayList<String> personas = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+        String[] columnas = {COLUMNA_ID_PERSONAS, COLUMNA_NOMBRE_PERSONAS};
+
+        Cursor cursor = db.query(TABLA_PERSONAS, columnas, null, null, null, null, COLUMNA_NOMBRE_PERSONAS);
+
+        if(cursor.moveToFirst()){
+            do{
+                personas.add(cursor.getInt(0) + "-" + cursor.getString(1));
+            }while(cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        return personas;
+    }
+    public void agregarPersona(String nombre){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("INSERT INTO " + TABLA_PERSONAS + " (" + COLUMNA_NOMBRE_PERSONAS + ") VALUES ('" + nombre + "')");
+    }
+    public void eliminarPersona(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLA_PERSONAS + " WHERE " + COLUMNA_ID_PERSONAS + " = " + id);
+    }
+    public boolean existePersona(String nombre){
+        SQLiteDatabase db = getReadableDatabase();
+        String[] columnas = {COLUMNA_ID_PERSONAS};
+        String[] args = {nombre};
+        Cursor cursor = db.query(TABLA_PERSONAS, columnas, COLUMNA_NOMBRE_PERSONAS + " = ?", args, null, null, null);
+        boolean existe = cursor.getCount() > 0;
+        cursor.close();
+        return existe;
     }
 
     @Override

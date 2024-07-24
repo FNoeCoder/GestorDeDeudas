@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         Deudas = findViewById(R.id.btnDeudas);
         Salir = findViewById(R.id.btnSalir);
         Personas.setOnClickListener(v -> {
-            Toast.makeText(this, "Personas", Toast.LENGTH_SHORT).show();
+            intent = new Intent(this, PersonasActivity.class);
+            startActivity(intent);
         });
         Deudas.setOnClickListener(v -> {
             Toast.makeText(this, "Deudas", Toast.LENGTH_SHORT).show();
