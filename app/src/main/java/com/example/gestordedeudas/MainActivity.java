@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         Deudas.setOnClickListener(v -> {
-            Toast.makeText(this, "Deudas", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Deudas", Toast.LENGTH_SHORT).show();
+            intent = new Intent(this, DeudaActivity.class);
+            startActivity(intent);
         });
         Salir.setOnClickListener(v -> {
             //Cerrar la aplicación

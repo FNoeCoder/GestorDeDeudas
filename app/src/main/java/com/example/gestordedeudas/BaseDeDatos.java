@@ -102,6 +102,24 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         cursor.close();
         return existe;
     }
+    //obtener todas las deudas y la persona que las tiene
+    public ArrayList<String> getDeudas() {
+        // "id-titulo
+        ArrayList<String> deudas = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String[] columnas = {COLUMNA_ID_DEUDAS, COLUMNA_TITULO_DEUDAS};
+
+        Cursor cursor = db.query(TABLA_DEUDAS, columnas, null, null, null, null, COLUMNA_TITULO_DEUDAS);
+
+        if (cursor.moveToFirst()) {
+            do {
+                deudas.add(cursor.getInt(0) + "-" + cursor.getString(1));
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return deudas;
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
