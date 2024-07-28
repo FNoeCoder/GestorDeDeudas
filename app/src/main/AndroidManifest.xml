@@ -13,6 +13,12 @@
         android:theme="@style/Theme.GestorDeDeudas"
         tools:targetApi="31">
         <activity
+            android:name=".DatosDeudaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarDeudaActivity"
+            android:exported="false" />
+        <activity
             android:name=".DeudaActivity"
             android:exported="false" />
         <activity

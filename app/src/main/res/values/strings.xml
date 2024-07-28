@@ -7,4 +7,22 @@
     <string name="agregar">Agregar</string>
 
     <string name="personas">Personas</string>
+
+
+    <string name="tituloAgregarDeuda">Agregar Deuda</string>
+    <string name="tituloDeuda">Titulo</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="montoTotal">Monto Total</string>
+    <string name="aporte">Aporte Inicial</string>">
+    <string name="limpiar">Limpiar</string>
+    <string name="historial">Historial de deuda</string>
+    <string name="totalDeuda">Total de la deuda: </string>">
+    <string name="totalAportes">Pagado: </string>
+    <string name="nuevoAporte">Aporte</string>
+    <string name="btnAportar">Aportar</string>
+    <string name="btnEliminarDeuda">Eliminar</string>
+    <string name="btnSaldarDeuda">Saldar el total</string>">
+
+
+
 </resources>

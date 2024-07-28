@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DatosDeudaActivity">
+
+    <TextView
+        android:id="@+id/tvTituloDeuda"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="135dp"
+        android:layout_marginBottom="22dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="409dp"
+        android:layout_height="639dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloDeuda">
+
+        <TextView
+            android:id="@+id/tvDeudor"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvMontoTotal"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvMontoPagado"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:text="@string/historial"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/listViewHistorial"
+            android:layout_width="match_parent"
+            android:layout_height="206dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/inputAporte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/nuevoAporte"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btnAgregarAporte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btnAportar" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnEliminarDeuda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btnEliminarDeuda" />
+
+        <Button
+            android:id="@+id/btnSaldarDeuda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btnSaldarDeuda" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
