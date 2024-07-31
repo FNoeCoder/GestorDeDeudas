@@ -5,48 +5,44 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DeudaActivity">
+    tools:context=".DeudaActivity"
+    android:background="@color/azul_cielo">
 
     <TextView
         android:id="@+id/textView3"
+        style="@style/titulos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginBottom="1dp"
-        android:text="TextView"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/listDeudas"
+        android:layout_marginTop="64dp"
+        android:text="@string/deudas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listaDeudas"
+        android:layout_width="376dp"
+        android:layout_height="512dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/azul_oscuro"
+        app:layout_constraintBottom_toTopOf="@id/btnEnviarAgregarDeuda"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnknownId" />
+        app:layout_constraintTop_toBottomOf="@id/textView3" />
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="654dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:orientation="vertical"
+    <Button
+        android:id="@+id/btnEnviarAgregarDeuda"
+        style="@style/estilo_boton"
+        android:layout_width="343dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/agregar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        tools:text="@string/agregar"
+        android:layout_marginHorizontal="30dp"/>
 
-        <ListView
-            android:id="@+id/listaDeudas"
-            android:layout_width="match_parent"
-            android:layout_height="390dp" />
-
-        <Button
-            android:id="@+id/btnEnviarAgregarDeuda"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/agregar"
-            tools:text="@string/agregar" />
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,112 +5,125 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DatosDeudaActivity">
+    tools:context=".DatosDeudaActivity"
+    android:background="@color/azul_cielo">
 
     <TextView
         android:id="@+id/tvTituloDeuda"
-        android:layout_width="142dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="134dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="135dp"
-        android:layout_marginBottom="22dp"
         android:text="TextView"
         android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/titulos"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="22dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="409dp"
-        android:layout_height="639dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloDeuda"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTituloDeuda">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:id="@+id/tvDeudor"
             android:layout_width="match_parent"
-            android:layout_height="41dp"
+            android:layout_height="wrap_content"
             android:text="TextView"
+            style="@style/titulos_secundarios"
             android:textAlignment="center"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/tvDescripcion"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:text="TextView" />
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/tvMontoTotal"
             android:layout_width="match_parent"
-            android:layout_height="29dp"
-            android:text="TextView" />
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/tvMontoPagado"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:text="TextView" />
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:layout_marginBottom="16dp" />
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content"
             android:text="@string/historial"
             android:textAlignment="center"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            style="@style/titulos_secundarios"
+            android:layout_marginBottom="8dp" />
 
         <ListView
             android:id="@+id/listViewHistorial"
             android:layout_width="match_parent"
-            android:layout_height="206dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="16dp"
+            android:background="@color/azul_oscuro"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
 
             <EditText
                 android:id="@+id/inputAporte"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/nuevoAporte"
-                android:inputType="number" />
+                android:inputType="number"
+                android:layout_marginEnd="8dp" />
 
             <Button
                 android:id="@+id/btnAgregarAporte"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/btnAportar" />
+                android:text="@string/btnAportar"
+                style="@style/estilo_boton"/>
         </LinearLayout>
 
         <Button
             android:id="@+id/btnEliminarDeuda"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btnEliminarDeuda" />
+            android:text="@string/btnEliminarDeuda"
+            android:layout_marginBottom="8dp"
+            style="@style/estilo_boton"
+            android:layout_marginHorizontal="30dp"/>
 
         <Button
             android:id="@+id/btnSaldarDeuda"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btnSaldarDeuda" />
+            android:text="@string/btnSaldarDeuda"
+            style="@style/estilo_boton"
+            android:layout_marginHorizontal="30dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

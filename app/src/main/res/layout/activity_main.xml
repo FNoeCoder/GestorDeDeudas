@@ -5,33 +5,28 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/azul_cielo">
 
     <TextView
         android:id="@+id/textView"
+        style="@style/titulos_secundarios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="109dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="109dp"
-        android:layout_marginBottom="244dp"
+        android:layout_marginTop="292dp"
         android:text="@string/TituloApp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnPersonas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="NotSibling" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/areaBotones"
-        android:layout_width="409dp"
-        android:layout_height="325dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="240dp"
+        android:layout_width="315dp"
+        android:layout_height="341dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="1dp"
         android:orientation="vertical"
         android:textAlignment="center"
         android:textDirection="locale"
@@ -39,24 +34,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintVertical_bias="0.846">
 
         <Button
             android:id="@+id/btnPersonas"
-            android:layout_width="wrap_content"
+            style="@style/estilo_boton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="@string/btoPersonas" />
 
         <Button
             android:id="@+id/btnDeudas"
-            android:layout_width="wrap_content"
+            style="@style/estilo_boton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="@string/btnDeudas" />
 
         <Button
             android:id="@+id/btnSalir"
-            android:layout_width="wrap_content"
+            style="@style/estilo_boton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/salir" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="407dp"
+        android:layout_height="165dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/icono_titulo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

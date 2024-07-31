@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">GestorDeDeudas</string>
-    <string name="TituloApp">Gestor De Deudas</string>
+    <string name="TituloApp">Aplicación de gestion de deudas</string>
     <string name="btoPersonas">Personas</string>
     <string name="btnDeudas">Deudas</string>
     <string name="salir">Salir</string>
     <string name="agregar">Agregar</string>
+    <string name="deudas">Deudas</string>
 
     <string name="personas">Personas</string>
 
