@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     Button Salir;
     Intent intent;
     BaseDeDatos bd;
+    private long pauseTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,5 +44,32 @@ public class MainActivity extends AppCompatActivity {
             //Cerrar la aplicación
             finish();
         });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        long pauseTime = System.currentTimeMillis();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (bd != null) {
+        }
     }
 }

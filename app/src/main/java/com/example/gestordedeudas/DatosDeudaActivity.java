@@ -2,6 +2,7 @@ package com.example.gestordedeudas;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -102,25 +103,32 @@ public class DatosDeudaActivity extends AppCompatActivity {
         ArrayAdapter adaptador = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, historial);
         listaHistorial.setAdapter(adaptador);
         adaptador.notifyDataSetChanged();
+
+        // si el estado de la deuda es finalizada, se eliminan los botones de agregar aporte y saldar deuda
+        if (deudaEstadoBD.equals("finalizada")) {
+            btnAportar.setVisibility(View.GONE);
+            btnSaldarDeuda.setVisibility(View.GONE);
+            inputAporte.setVisibility(View.GONE);
+        }
     }
     public void eventosBotones(){
 
         btnAportar.setOnClickListener(view -> {
             if (inputAporte.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Ingrese un monto", Toast.LENGTH_SHORT).show();
-            } else if (Double.parseDouble(inputAporte.getText().toString()) > Double.parseDouble(montoDeudaBD) - Double.parseDouble(montoPagadoBD)) {
+            } else if (Double.parseDouble(inputAporte.getText().toString()) > Double.parseDouble(quitarComasNumeros(montoDeudaBD)) - Double.parseDouble(quitarComasNumeros(montoPagadoBD))) {
                 Toast.makeText(this, "El monto ingresado es mayor al monto de la deuda", Toast.LENGTH_SHORT).show();
             } else if (Double.parseDouble(inputAporte.getText().toString()) <= 0) {
                 Toast.makeText(this, "El monto ingresado debe ser mayor a 0", Toast.LENGTH_SHORT).show();
             // si la deuda está finalizada no se puede agregar un aporte
             }else if (deudaEstadoBD.equals("finalizada")) {
                 Toast.makeText(this, "La deuda ya está finalizada", Toast.LENGTH_SHORT).show();
-            } else if (Double.parseDouble(inputAporte.getText().toString()) == Double.parseDouble(montoDeudaBD) - Double.parseDouble(montoPagadoBD)) {
+            } else if (Double.parseDouble(inputAporte.getText().toString()) == Double.parseDouble(quitarComasNumeros(montoDeudaBD)) - Double.parseDouble(quitarComasNumeros(montoPagadoBD))) {
                 baseDeDatos.setHistorialFinalizacion(Float.parseFloat(inputAporte.getText().toString()), idDeuda, idDeudor);
                 inputAporte.setText("");
                 obtenerDatosDeuda();
                 Toast.makeText(this, "Deuda saldada", Toast.LENGTH_SHORT).show();
-            } else if (Double.parseDouble(inputAporte.getText().toString()) < Double.parseDouble(montoDeudaBD) - Double.parseDouble(montoPagadoBD)) {
+            } else if (Double.parseDouble(inputAporte.getText().toString()) < Double.parseDouble(quitarComasNumeros(montoDeudaBD)) - Double.parseDouble(quitarComasNumeros(montoPagadoBD))) {
                 baseDeDatos.setHistorialPago(Float.parseFloat(inputAporte.getText().toString()), idDeuda, idDeudor);
                 inputAporte.setText("");
                 obtenerDatosDeuda();
@@ -141,11 +149,15 @@ public class DatosDeudaActivity extends AppCompatActivity {
             builder.show();
         });
         btnSaldarDeuda.setOnClickListener(view -> {
+            if (deudaEstadoBD.equals("finalizada")) {
+                Toast.makeText(this, "La deuda ya está finalizada", Toast.LENGTH_SHORT).show();
+                return;
+            }
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Saldar deuda");
             builder.setMessage("¿Está seguro de que deseas saldar la deuda " + tituloDeudaBD + "?");
             builder.setPositiveButton("Sí", (dialogInterface, i) -> {
-                float montoRestante = Float.parseFloat(montoDeudaBD) - Float.parseFloat(montoPagadoBD);
+                float montoRestante = Float.parseFloat(quitarComasNumeros(montoDeudaBD)) - Float.parseFloat(quitarComasNumeros(montoPagadoBD));
                 baseDeDatos.setHistorialFinalizacion(montoRestante, idDeuda, idDeudor);
                 obtenerDatosDeuda();
             });
@@ -157,5 +169,14 @@ public class DatosDeudaActivity extends AppCompatActivity {
 
 
     }
+    public String quitarComasNumeros(String numero) {
+        return numero.replace(",", "");
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+
+    }
 }

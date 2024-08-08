@@ -97,13 +97,20 @@ public class PersonasActivity extends AppCompatActivity {
                 // obtener el id de la persona y convertirla a entero
                 int personaID = Integer.parseInt(personasIDs.get(position));
                 String personaNombre = personasNombres.get(position);
+
                 // hacer un dialog para preguntar si se quiere eliminar
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Eliminar persona");
                 builder.setMessage("¿Desea eliminar a " + personaNombre + "?, se eliminará todo su contenido");
                 builder.setPositiveButton("Eliminar", (dialog, which) -> {
-                    baseDeDatos.eliminarPersona(personaID);
-                    obtenerDatos();
+                    if (baseDeDatos.personaTieneDeudas(personaID)){
+                        Toast.makeText(this, "Esta persona tiene deudas", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        baseDeDatos.eliminarPersona(personaID);
+                        obtenerDatos();
+                    }
+
                 });
                 builder.setNegativeButton("Cancelar", null);
                 builder.show();
@@ -112,5 +119,11 @@ public class PersonasActivity extends AppCompatActivity {
             });
 
         }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+
     }
 }

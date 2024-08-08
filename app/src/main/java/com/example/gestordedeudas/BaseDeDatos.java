@@ -91,6 +91,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     public void eliminarPersona(int id){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLA_PERSONAS + " WHERE " + COLUMNA_ID_PERSONAS + " = " + id);
+        //borrar los datos de esa persona
     }
     public boolean existePersona(String nombre){
         SQLiteDatabase db = getReadableDatabase();
@@ -124,7 +125,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         // la fecha de creacion es la fecha con el formato de dia mes año por ejemplo: 01/01/2023
         Date date = new java.util.Date();
         String fecha = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getYear();
-        String descripcion = cantidad < 1 ? "Creacion de deuda" : "Creacion de deuda con monto de " + cantidad;
+        String descripcion = cantidad < 1 ? "Creacion de deuda" : "Creacion de deuda con monto de " + getNumeroSinDecimales(String.valueOf((cantidad)));
 
         SQLiteDatabase db = getWritableDatabase();
 
@@ -134,7 +135,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         // la fecha de creacion es la fecha con el formato de dia mes año por ejemplo:
         Date date = new java.util.Date();
         String fecha = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getYear();
-        String descripcion = "Aporte de " + cantidad;
+        String descripcion = "Aporte de " + getNumeroSinDecimales(String.valueOf((cantidad)));;
 
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("INSERT INTO " + TABLA_HISTORIAL + " (" + COLUMNA_CREACION_HISTORIAL + ", " + COLUMNA_DESCRIPCION_HISTORIAL + ", " + COLUMNA_CANTIDAD_PAGA_HISTORIAL + ", " + COLUMNA_DEUDAS_ID_HISTORIAL + ", " + COLUMNA_DEUDAS_PERSONAS_ID_HISTORIAL + ") VALUES ('" + fecha + "', '" + descripcion + "', " + cantidad + ", " + idDeuda + ", " + idDeudor + ")");
@@ -144,7 +145,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         // la fecha de creacion es la fecha con el formato de dia mes año por ejemplo:
         Date date = new java.util.Date();
         String fecha = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getYear();
-        String descripcion = "Finalización de deuda con monto de " + cantidad;
+        String descripcion = "Finalización de deuda con monto de " + getNumeroSinDecimales(String.valueOf((cantidad)));;
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("INSERT INTO " + TABLA_HISTORIAL + " (" + COLUMNA_CREACION_HISTORIAL + ", " + COLUMNA_DESCRIPCION_HISTORIAL + ", " + COLUMNA_CANTIDAD_PAGA_HISTORIAL + ", " + COLUMNA_DEUDAS_ID_HISTORIAL + ", " + COLUMNA_DEUDAS_PERSONAS_ID_HISTORIAL + ") VALUES ('" + fecha + "', '" + descripcion + "', " + cantidad + ", " + idDeuda + ", " + idDeudor + ")");
         //poner el estado de la deuda en finalizada
@@ -271,6 +272,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     public void eliminarDeuda(int idDeuda){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLA_DEUDAS + " WHERE " + COLUMNA_ID_DEUDAS + " = " + idDeuda);
+        db.close();
     }
     public void setEstadoDeudaFinalizada(int idDeuda){
         SQLiteDatabase db = getWritableDatabase();
@@ -297,6 +299,16 @@ public class BaseDeDatos extends SQLiteOpenHelper {
             cursor.close();
         }
         return deudas;
+    }
+
+    public boolean personaTieneDeudas(int idDeudor){
+        SQLiteDatabase db = getReadableDatabase();
+        String[] columnas = {COLUMNA_ID_DEUDAS};
+        String[] args = {String.valueOf(idDeudor)};
+        Cursor cursor = db.query(TABLA_DEUDAS, columnas, COLUMNA_PERSONAS_ID_DEUDAS + " = ?", args, null, null, null);
+        boolean tieneDeudas = cursor.getCount() > 0;
+        cursor.close();
+        return tieneDeudas;
     }
 
     @Override

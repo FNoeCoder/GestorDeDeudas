@@ -59,10 +59,14 @@ public class AgregarDeudaActivity extends AppCompatActivity {
             inputAporteInicial.setText("");
         });
         btnAgregarDeuda.setOnClickListener(v -> {
-            agregarDeuda();
-            intent = new Intent(this, DeudaActivity.class);
-            startActivity(intent);
-            finish();
+            //agregarDeuda();
+            if (agregarDeuda()){
+                intent = new Intent(this, DeudaActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+
         });
     }
     public void InicializarVariables(){
@@ -97,33 +101,39 @@ public class AgregarDeudaActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPersonas.setAdapter(adapter);
     }
-    public void agregarDeuda(){
+    public boolean agregarDeuda(){
         if (spinnerPersonas.getSelectedItemPosition() == 0){
             Toast.makeText(this, "Debe seleccionar una persona", Toast.LENGTH_SHORT).show();
+            return false;
         }
         // si el titulo de la deuda esta vacio
         else if (inputTituloDeuda == null || inputTituloDeuda.getText().toString().isEmpty()){
             Toast.makeText(this, "Debe ingresar el titulo de la deuda", Toast.LENGTH_SHORT).show();
+            return false;
         }
         else if (inputMontoDeuda == null || inputMontoDeuda.getText().toString().isEmpty()){
             Toast.makeText(this, "Debe ingresar el monto de la deuda", Toast.LENGTH_SHORT).show();
+            return false;
         }
         else if (inputAporteInicial == null || inputAporteInicial.getText().toString().isEmpty()){
             Toast.makeText(this, "Debe ingresar el aporte inicial", Toast.LENGTH_SHORT).show();
+            return false;
         }
         else if (parseInt(inputAporteInicial.getText().toString()) > parseInt(inputMontoDeuda.getText().toString())){
             Toast.makeText(this, "El aporte inicial no puede ser mayor al monto de la deuda", Toast.LENGTH_SHORT).show();
+            return false;
         }
         else if (baseDeDatos.existeDeuda(inputTituloDeuda.getText().toString())){
             Toast.makeText(this, "Ya existe una deuda con ese titulo", Toast.LENGTH_SHORT).show();
+            return false;
         }
         //si el monto es igual a la deuda
         else if (parseInt(inputMontoDeuda.getText().toString()) == parseInt(inputAporteInicial.getText().toString())){
             Toast.makeText(this, "La deuda no puede ser igual al aporte inicial", Toast.LENGTH_SHORT).show();
+            return false;
         }
         //si el aporte inicial es menor al se agrega a la base de datos
         else if (parseInt(inputAporteInicial.getText().toString()) < parseInt(inputMontoDeuda.getText().toString())){
-            Toast.makeText(this, "Se debe agregar a la bd", Toast.LENGTH_SHORT).show();
             try {
                 int idPersona = parseInt(personasId.get(spinnerPersonas.getSelectedItemPosition()));
                 String tituloDeuda = inputTituloDeuda.getText().toString();
@@ -131,14 +141,24 @@ public class AgregarDeudaActivity extends AppCompatActivity {
                 float montoDeuda = Float.parseFloat(inputMontoDeuda.getText().toString());
                 float aporteInicial = Float.parseFloat(inputAporteInicial.getText().toString());
                 baseDeDatos.setDeudaNueva(tituloDeuda, descripcionDeuda, montoDeuda, aporteInicial, idPersona);
+                return true;
             }
             catch (Exception e){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(e.getMessage());
                 builder.setTitle("Error");
                 builder.show();
-                return;
+                return false;
             }
         }
+        else {
+            return false;
+        }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+
     }
 }
